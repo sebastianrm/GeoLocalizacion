@@ -16,6 +16,7 @@ import org.xml.sax.SAXException;
 import cl.mobilLoyalti.geoLocation.bean.GeoReferencia;
 import cl.mobilLoyalti.geoLocation.bean.ServiCentro;
 import cl.mobilLoyalti.geoLocation.db.dao.GeoReferenciaDao;
+import cl.mobilLoyalti.geoLocation.db.dao.PreciosDao;
 import cl.mobilLoyalti.geoLocation.db.dao.ServiCentroDao;
 import cl.mobilLoyalti.geoLocation.logic.GeoCoding;
 
@@ -49,6 +50,8 @@ public class MainGeoLocalizacion {
 						.getDireccion().replaceAll("/", "")+", Chile");
 
 				ServiCentroDao scDao = new ServiCentroDao();
+				PreciosDao precioDao = new PreciosDao();
+				
 				next.setGeoRef(latLongDirecc);
 
 				scDao.update(next);
@@ -56,6 +59,10 @@ public class MainGeoLocalizacion {
 				GeoReferenciaDao gro = new GeoReferenciaDao();
 
 				gro.insert(next);
+				
+				precioDao.update(next);
+				
+				
 
 			} catch (XPathExpressionException e) {
 				log.error(e);

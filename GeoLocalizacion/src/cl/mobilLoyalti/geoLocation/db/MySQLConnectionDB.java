@@ -6,13 +6,10 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
+import cl.mobilLoyalti.geoLocation.utiles.extern.ParamConf;
+
 public class MySQLConnectionDB extends ConnectionDB{
 
-	private String user;
-	private String password;
-	private String ip;
-	private String port;
-	private String sid;
 	private Connection conn;
 	private static MySQLConnectionDB connectionDB;
 	private static Logger log = Logger.getLogger(MySQLConnectionDB.class);
@@ -21,11 +18,7 @@ public class MySQLConnectionDB extends ConnectionDB{
 	 * Setea inmediatamente los parametros de la base de datos para su utilización.
 	 */	
 	public MySQLConnectionDB(){
-		this.setUser("root");
-		this.setPassword("123456");
-		this.setIp("localhost");
-		this.setPort("3306");
-		this.setSid("bencineras");
+		super();
 	}
 	
 	/*
@@ -46,15 +39,17 @@ public class MySQLConnectionDB extends ConnectionDB{
 	 * @throws DataBaseException Si ocurren errores en la conexion a la base de datos.
 	 */	
 	public Connection createConnection() {
+		ParamConf paramConf = new ParamConf();
+		
 		Connection conn = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e);
 		}
-		String url = "jdbc:mysql://" + getIp() + ":" + getPort() + "/" + getSid();
+		String url = "jdbc:mysql://" + paramConf.DB_CONNECTION_MYSQL_IP + ":" + paramConf.DB_CONNECTION_MYSQL_PORT + "/" + paramConf.DB_CONNECTION_MYSQL_SCHEMA;
 		try {
-			conn = DriverManager.getConnection(url, getUser(), getPassword());
+			conn = DriverManager.getConnection(url, paramConf.DB_CONNECTION_MYSQL_USER, paramConf.DB_CONNECTION_MYSQL_PASS);
 		} catch (SQLException e) {
 			log.error(e);
 		}
@@ -76,46 +71,6 @@ public class MySQLConnectionDB extends ConnectionDB{
 				this.conn = null;
 			}
 		}	
-	}
-	
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getIp() {
-		return ip;
-	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-
-	public String getPort() {
-		return port;
-	}
-
-	public void setPort(String port) {
-		this.port = port;
-	}
-
-	public String getSid() {
-		return sid;
-	}
-
-	public void setSid(String sid) {
-		this.sid = sid;
 	}
 	
 	public static synchronized MySQLConnectionDB getInstance(){

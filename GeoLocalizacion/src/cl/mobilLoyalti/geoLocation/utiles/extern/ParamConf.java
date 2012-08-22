@@ -16,6 +16,8 @@ import org.apache.log4j.Logger;
  */
 public class ParamConf {
 
+	private static final String CONF_CONF_PROPERTIES = "./conf/conf.properties";
+
 	public ParamConf() {
 		if (props == null) {
 			props = new Properties();
@@ -23,7 +25,7 @@ public class ParamConf {
 		try {
 
 			FileInputStream fileInputStream = new FileInputStream(
-					"./config/conf.properties");
+					CONF_CONF_PROPERTIES);
 
 			props.load(fileInputStream);
 			fileInputStream.close();
@@ -38,12 +40,12 @@ public class ParamConf {
 	public String VERSION = getProps("VERSION");
 	public String FECHA_DEPLOY = getProps("FECHA_DEPLOY");
 
-	public String DB_CONNECTION_MYSQL_IP = getProps("DB_CONNECTION_MYSQL_IP");
-	public String DB_CONNECTION_MYSQL_USER = getProps("DB_CONNECTION_MYSQL_USER");
-	public String DB_CONNECTION_MYSQL_PASS = getProps("DB_CONNECTION_MYSQL_PASS");
-	public String DB_CONNECTION_MYSQL_PORT = getProps("DB_CONNECTION_MYSQL_PORT");
-	public String DB_CONNECTION_MYSQL_SCHEMA = getProps("DB_CONNECTION_MYSQL_SCHEMA");
-
+	public String JDBC_DRIVER = getProps("JDBC_DRIVER");
+	public String DB_CONNECTION_IP = getProps("DB_CONNECTION_IP");
+	public String DB_CONNECTION_USER = getProps("DB_CONNECTION_USER");
+	public String DB_CONNECTION_PASS = getProps("DB_CONNECTION_PASS");
+	public String DB_CONNECTION_PORT = getProps("DB_CONNECTION_PORT");
+	public String DB_CONNECTION_SCHEMA = getProps("DB_CONNECTION_SCHEMA");
 
 	/**
 	 * 
@@ -66,14 +68,16 @@ public class ParamConf {
 		try {
 
 			FileInputStream fileInputStream = new FileInputStream(
-					"./config/conf.properties");
+					CONF_CONF_PROPERTIES);
 
 			props.load(fileInputStream);
 			fileInputStream.close();
 		} catch (FileNotFoundException e) {
-			Logger.getLogger(ParamConf.class).error(e);
+			Logger logger = Logger.getLogger(ParamConf.class);
+			logger.error(e);
 		} catch (IOException e) {
-			Logger.getLogger(ParamConf.class).error(e);
+			Logger logger = Logger.getLogger(ParamConf.class);
+			logger.error(e);
 		}
 	}
 }

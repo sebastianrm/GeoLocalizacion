@@ -14,7 +14,7 @@ import cl.mobilLoyalti.geoLocation.db.MySQLConnectionDB;
 public class PreciosDao extends ConnectionDB {
 
 	private static final String SQL_INSERT = "INSERT INTO precios (precio,fkbencina,fkempresa,fkdireccion,fkregion,fecha_actualizacion) values (?,?,?,?,?,?)";
-	private static final String SQL_UPDATE = "UPDATE bencineras.precios SET fklatitud = ?,fklongitud=? WHERE fkempresa = ? and fkdireccion = ? and fkregion = ?";
+	private static final String SQL_UPDATE = "UPDATE precios SET fklatitud = ?,fklongitud=? WHERE fkempresa = ? and fkdireccion = ? and fkregion = ?";
 	private static Logger log = Logger.getLogger(PreciosDao.class);
 
 	public void insert(Bencinas precios) {
@@ -71,7 +71,7 @@ public class PreciosDao extends ConnectionDB {
 			ps.setString(5, sc.getRegion().getNombre());
 			ps.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e);
 		} finally {
 			close(ps, conn);
 		}

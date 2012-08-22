@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 import cl.mobilLoyalti.geoLocation.bean.Region;
 import cl.mobilLoyalti.geoLocation.db.ConnectionDB;
 import cl.mobilLoyalti.geoLocation.db.MySQLConnectionDB;
@@ -11,7 +13,7 @@ import cl.mobilLoyalti.geoLocation.db.MySQLConnectionDB;
 public class RegionDao extends ConnectionDB{
 
 	private static final String SQL_INSERT = "INSERT INTO regiones (nombre) values (?)";
-	
+	private static Logger log = Logger.getLogger(RegionDao.class);
 	
 	public void insert (Region region){
 		
@@ -24,8 +26,7 @@ public class RegionDao extends ConnectionDB{
 		
 		ps.execute();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e);
 		}finally{
 			close(ps,conn);
 		}

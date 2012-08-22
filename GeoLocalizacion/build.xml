@@ -7,7 +7,7 @@ y que incluya todos los subdirectorios(**) que hay dentro de src,
 además indicamos en donde va a depositar los archivos .class  
 cuando haga la compilación-->
 
-	<javac includeAntRuntime="ignore" srcdir="src" includes="**/*.java" destdir="bin" target="1.5">
+	<javac includeAntRuntime="ignore" srcdir="src" includes="**/*.java" destdir="bin" target="1.6">
 
 <!-- Indicamos en que directorio tenemos las librerias externas 
 que son necesarias par compilar y que incluya sólo archivos .jar, 
@@ -30,7 +30,7 @@ como por ejemplo la libreria de jdbc de postgresql: postgresql-8.1-412.jdbc3.jar
 		<manifest>
 		<!-- en que clase está el método main-->
 			<attribute name="Main-Class" value="cl.mobilLoyalti.geoLocation.main.MainGeoLocalizacion" />
-			<attribute name="class-path" value="lib/log4j-1.2.15.jar lib/mysql-connector-java-5.1.7-bin.jar" />
+			<attribute name="class-path" value="lib/log4j-1.2.15.jar lib/mysql-connector-java-5.1.7-bin.jar lib/sqljdbc4.jar" />
 		</manifest>
 	</jar>
 </target>

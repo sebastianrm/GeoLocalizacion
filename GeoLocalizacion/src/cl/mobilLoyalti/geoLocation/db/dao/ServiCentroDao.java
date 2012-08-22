@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 import cl.mobilLoyalti.geoLocation.bean.GeoReferencia;
 import cl.mobilLoyalti.geoLocation.bean.Region;
 import cl.mobilLoyalti.geoLocation.bean.ServiCentro;
@@ -15,9 +17,11 @@ import cl.mobilLoyalti.geoLocation.db.MySQLConnectionDB;
 
 public class ServiCentroDao extends ConnectionDB {
 
+	private static Logger log = Logger.getLogger(ServiCentroDao.class);
+	
 	private static final String SQL_INSERT = "INSERT INTO servicentros (empresa,direccion,latitud,longitud,fkregion) values (?,?,?,?,?)";
 	private static final String SQL_SELECT_ALL = "SELECT empresa,direccion,latitud,longitud,fkregion FROM servicentros";
-	private static final String SQL_UPDATE = "UPDATE bencineras.servicentros SET latitud = ?, longitud = ? WHERE empresa = ? AND direccion = ? AND fkregion = ?";
+	private static final String SQL_UPDATE = "UPDATE servicentros SET latitud = ?, longitud = ? WHERE empresa = ? AND direccion = ? AND fkregion = ?";
 	private static final String SQL_SELECT_BY_LAT_LONG = "SELECT empresa,direccion,latitud,longitud,fkregion FROM servicentros where latitud =? and longitud=?";
 	public void insert(ServiCentro sc) {
 
@@ -40,7 +44,7 @@ public class ServiCentroDao extends ConnectionDB {
 			ps.setString(5, sc.getRegion().getNombre());
 			ps.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e);
 		} finally {
 			close(ps, conn);
 		}
@@ -73,7 +77,7 @@ public class ServiCentroDao extends ConnectionDB {
 			ps.setString(5, sc.getRegion().getNombre());
 			ps.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e);
 		} finally {
 			close(ps, conn);
 		}
@@ -112,7 +116,7 @@ public class ServiCentroDao extends ConnectionDB {
 			return rsArray;
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e);
 		} finally {
 			close(rs, ps, conn);
 		}
@@ -155,7 +159,7 @@ public class ServiCentroDao extends ConnectionDB {
 			return rsArray;
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e);
 		} finally {
 			close(rs, ps, conn);
 		}

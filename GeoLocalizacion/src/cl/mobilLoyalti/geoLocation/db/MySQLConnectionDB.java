@@ -19,7 +19,6 @@ public class MySQLConnectionDB extends ConnectionDB {
 	 * de datos para su utilización.
 	 */
 	public MySQLConnectionDB() {
-		super();
 	}
 
 	/*
@@ -54,14 +53,13 @@ public class MySQLConnectionDB extends ConnectionDB {
 		// + paramConf.DB_CONNECTION_MYSQL_PORT + "/" +
 		// paramConf.DB_CONNECTION_MYSQL_SCHEMA;
 
-		String url = "jdbc:sqlserver://" + paramConf.DB_CONNECTION_IP
-				+ ":" + paramConf.DB_CONNECTION_PORT + ";databaseName="
+		String url = "jdbc:sqlserver://" + paramConf.DB_CONNECTION_IP + ":"
+				+ paramConf.DB_CONNECTION_PORT + ";databaseName="
 				+ paramConf.DB_CONNECTION_SCHEMA + ";";
 
 		try {
 			conn = DriverManager.getConnection(url,
-					paramConf.DB_CONNECTION_USER,
-					paramConf.DB_CONNECTION_PASS);
+					paramConf.DB_CONNECTION_USER, paramConf.DB_CONNECTION_PASS);
 		} catch (SQLException e) {
 			log.error(e);
 		}

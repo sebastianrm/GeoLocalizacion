@@ -35,7 +35,7 @@ public class MainGeoLocalizacion {
 		
 		MainGeoLocalizacion main = new MainGeoLocalizacion();
 		ArrayList<ServiCentro> recuperaServicentro = main
-				.recuoperaServicentro();
+				.recuperaServicentro();
 
 		Iterator<ServiCentro> iterator = recuperaServicentro.iterator();
 
@@ -78,7 +78,7 @@ public class MainGeoLocalizacion {
 
 	}
 
-	private ArrayList<ServiCentro> recuoperaServicentro() {
+	private ArrayList<ServiCentro> recuperaServicentro() {
 		ServiCentroDao serviCentroDao = new ServiCentroDao();
 		
 //		return serviCentroDao.selectAll();
